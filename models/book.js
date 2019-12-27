@@ -9,10 +9,11 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoincrement: true,
         },
-        // title, author, genre, year
+        // Book properties: title, author, genre, year
         title: {
             type: Sequelize.STRING(500),
             allowNull: false,
+            // Validator for title 
             validate: {
                 notNull: {
                     msg: 'Please provide a value for "Title"',
@@ -25,6 +26,7 @@ module.exports = (sequelize) => {
         author: {
             type: Sequelize.STRING,
             allowNull: false,
+            // Validator for author
             validate: {
                 notNull: {
                     msg: 'Please provide a value for "Author"',
