@@ -5,7 +5,7 @@ block content
     if errors
         each error in errors
             p(class="error")= error.message
-    form(action="/books/" method="post")
+    form(action="/books/new" method="post")
         p
             label(for="title") Title
             input(name="title", type="text", id="title")
@@ -21,4 +21,4 @@ block content
         p
             input(type="submit", value="Create New Book")
         p
-            a.button(href="/books/") Cancel
+            a.button(href="/books") Cancel

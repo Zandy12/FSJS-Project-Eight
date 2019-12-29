@@ -25,11 +25,11 @@ router.get('/new', (req, res) => {
 });
 
 /* POST create book. */
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/new', asyncHandler(async (req, res) => {
   let book;
   try {
     book = await Book.create(req.body);
-    res.redirect("/books/");
+    res.redirect("/books");
   } catch (error) {
     if (error.name === "SequelizeValidationError") { // checking the error
       book = await Book.build(req.body);
@@ -51,7 +51,7 @@ router.get("/:id", asyncHandler(async (req, res) => {
   if (book) {
     res.render("update-book", { book });
   } else {
-    res.sendStatus(404);
+    res.render("page-not-found");
   }
 }));
 
@@ -62,7 +62,7 @@ router.post('/:id', asyncHandler(async (req, res) => {
     book = await Book.findByPk(req.params.id);
     if (book) {
       await book.update(req.body);
-      res.redirect("/books/");
+      res.redirect("/books");
     } else {
       res.sendStatus(404);
     }
@@ -87,7 +87,7 @@ router.get("/:id/delete", asyncHandler(async (req, res) => {
   if (book) {
     res.render('update-book', { book });
   } else {
-    res.sendStatus(404);
+    res.render("page-not-found");
   }
 })); 
 
@@ -100,7 +100,6 @@ router.post('/:id/delete', asyncHandler(async (req ,res) => {
   } else {
     res.sendStatus(404);
   }
-
 }));
 
 module.exports = router;
